@@ -12,9 +12,16 @@
                      class="item">
         Thermostat List
       </mat-list-item>
+
+      <mat-list-item (click)="logout()"
+                     class="item">
+        Logout
+      </mat-list-item>
     </mat-list>
   </mat-drawer>
-  <mat-drawer-content class="content">
-    <router-outlet></router-outlet>
+  <mat-drawer-content>
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
   </mat-drawer-content>
 </mat-drawer-container>
