@@ -37,10 +37,11 @@ export class AuthenticationComponent implements OnInit {
     }
 
     this.authService.login(user);
+    this.redirectUser();
   }
 
   private redirectUser() {
-    const redirectPath = this.authService.currentUser === 'manager'
+    const redirectPath = this.authService.currentUser === 'management'
       ? ['/thermostat', 'management'] : ['/thermostat', 'list'];
 
     this.router.navigate(redirectPath).finally();
