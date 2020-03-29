@@ -1,1 +1,29 @@
-thermostat manager
+<mat-toolbar>
+  <span>Manager</span>
+
+  <div class="count">
+    <span class="count--item"># Apartments: {{apartmentCount}}</span>
+    <span class="count--item"># Thermostats: {{thermostatCount}}</span>
+  </div>
+</mat-toolbar>
+
+<button
+  mat-fab
+  color="primary"
+  class="cta"
+  (click)="onCreate()">
+  <mat-icon>add</mat-icon>
+</button>
+
+<div class="content">
+  <mat-card class="card" *ngFor="let apartment of apartmentMap | keyvalue">
+    <mat-card-header>
+      <mat-card-title>Apartment: {{apartment.key}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        # Thermostats: {{apartment.value.thermostats.length}}
+      </p>
+    </mat-card-content>
+  </mat-card>
+</div>
