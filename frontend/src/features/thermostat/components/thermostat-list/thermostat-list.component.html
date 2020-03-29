@@ -1,1 +1,48 @@
-thermostat list
+<mat-toolbar>
+  <span>List</span>
+
+  <div class="count">
+    <span class="count--item"># Thermostats: {{thermostats.length}}</span>
+  </div>
+</mat-toolbar>
+
+<table mat-table [dataSource]="thermostats"
+       class="mat-elevation-z8 thermostats">
+
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>ID</th>
+    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="temperature">
+    <th mat-header-cell *matHeaderCellDef>Temperature (°C)</th>
+    <td mat-cell *matCellDef="let element"> {{element.temperature}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="humidity">
+    <th mat-header-cell *matHeaderCellDef>Humidity (%)</th>
+    <td mat-cell *matCellDef="let element"> {{element.humidity}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="location">
+    <th mat-header-cell *matHeaderCellDef>Location</th>
+    <td mat-cell *matCellDef="let element"> {{element.location}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="household_token">
+    <th mat-header-cell *matHeaderCellDef>Apartment ID</th>
+    <td mat-cell *matCellDef="let element"> {{element.household_token}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="battery_charge">
+    <th mat-header-cell *matHeaderCellDef> Battery (%)</th>
+    <td mat-cell *matCellDef="let element"> {{element.battery_charge}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+      [ngClass]="{'low-battery': row.battery_charge < 30}"
+      class="thermostat"
+      [routerLink]="['/thermostat', 'details', row.id]"
+  ></tr>
+</table>
