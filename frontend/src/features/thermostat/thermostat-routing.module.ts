@@ -5,14 +5,13 @@ import { ThermostatManagerComponent } from './components/thermostat-manager/ther
 import { ThermostatListComponent } from './components/thermostat-list/thermostat-list.component';
 import { ThermostatDetailsComponent } from './components/thermostat-details/thermostat-details.component';
 import { ThermostatLayoutComponent } from './components/thermostat-layout/thermostat-layout.component';
+import { ManagementGuard } from '../authentication/guards/management.guard';
 
 const routes: Routes = [
   {
     path: 'thermostat',
     component: ThermostatLayoutComponent,
-    canActivate: [
-      AuthenticatedGuard,
-    ],
+    canActivate: [AuthenticatedGuard],
     children: [
       {
         path: '',
@@ -22,6 +21,7 @@ const routes: Routes = [
       {
         path: 'management',
         component: ThermostatManagerComponent,
+        canActivate: [ManagementGuard]
       },
       {
         path: 'list',
