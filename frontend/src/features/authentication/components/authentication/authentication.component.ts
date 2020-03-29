@@ -30,7 +30,7 @@ export class AuthenticationComponent implements OnInit {
   }
 
   login({user}) {
-    if (!user || !['owner', 'user'].includes(user)) {
+    if (!user || !['management', 'user'].includes(user)) {
       this.snackbar.open('No user found.', 'ok');
       this.loginForm.reset();
       return;
