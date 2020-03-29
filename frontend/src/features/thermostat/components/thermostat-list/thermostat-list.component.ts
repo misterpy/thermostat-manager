@@ -45,10 +45,7 @@ export class ThermostatListComponent implements OnDestroy {
 
         if (this.thermostats.length > 0) {
           const requests = this.thermostats.map(({id}) => this.thermostatService.getMeasurements(id)
-            .pipe(
-              map(readings => readings.sort((a, b) => b.id - a.id)),
-              map(readings => readings[0]),
-            ));
+            .pipe(map(readings => readings[0])));
 
           zip(...requests)
             .pipe(takeUntil(this.componentDestroyed$))
