@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class AuthService {
-  currentUser: string = 'management';
+  currentUser: string;
 
   login(user: string): void {
     this.currentUser = user;

@@ -30,12 +30,6 @@ export class AuthenticationComponent implements OnInit {
   }
 
   login({user}) {
-    if (!user || !['management', 'user'].includes(user)) {
-      this.snackbar.open('No user found.', 'ok');
-      this.loginForm.reset();
-      return;
-    }
-
     this.authService.login(user);
     this.redirectUser();
   }
