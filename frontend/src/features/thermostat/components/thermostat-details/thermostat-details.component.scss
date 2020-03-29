@@ -1,0 +1,24 @@
+.count {
+  display: flex;
+  margin-left: auto;
+  align-items: center;
+
+  &--item {
+    margin-left: 24px;
+  }
+}
+
+.readings {
+  width: 100%;
+  margin-top: 24px;
+}
+
+.reading {
+  &:hover {
+    background-color: aliceblue;
+  }
+}
+
+.low-battery {
+  color: indianred;
+}
