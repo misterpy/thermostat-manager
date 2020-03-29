@@ -16,6 +16,7 @@ import { ThermostatListComponent } from './components/thermostat-list/thermostat
 import { ThermostatRoutingModule } from './thermostat-routing.module';
 import { ThermostatLayoutComponent } from './components/thermostat-layout/thermostat-layout.component';
 import { ThermostatDetailsComponent } from './components/thermostat-details/thermostat-details.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -26,18 +27,19 @@ import { ThermostatDetailsComponent } from './components/thermostat-details/ther
   ],
   imports: [
     CommonModule,
-    ThermostatRoutingModule,
-    MatToolbarModule,
     MatListModule,
-    MatTableModule,
-    MatPaginatorModule,
     MatCardModule,
-    MatButtonModule,
-    MatSidenavModule,
     MatIconModule,
     MatMenuModule,
-    MatTooltipModule,
+    MatTableModule,
+    MatButtonModule,
     MatDialogModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatTooltipModule,
+    HttpClientModule,
+    MatPaginatorModule,
+    ThermostatRoutingModule,
   ],
 })
 export class ThermostatModule { }

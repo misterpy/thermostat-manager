@@ -15,6 +15,7 @@ const routes: Routes = [
     ],
     children: [
       {
+        path: '',
         pathMatch: 'prefix',
         redirectTo: 'management',
       },
