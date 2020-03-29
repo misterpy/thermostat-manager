@@ -1,13 +1,21 @@
 export interface Thermostat {
-  id: string;
-  household_token: string;
+  id: number;
   location: string;
+  household_token: string;
+  humidity?: number;
+  temperature?: number;
+  battery_charge?: number;
 }
 
 export interface Reading {
-  id: string;
-  thermostat_id: string;
-  temperature: number;
+  id: number;
   humidity: number;
+  temperature: number;
+  thermostat_id: number;
   battery_charge: number;
+}
+
+export interface Apartment {
+  id: string;
+  thermostats?: Thermostat[];
 }

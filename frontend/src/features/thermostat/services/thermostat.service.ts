@@ -23,7 +23,7 @@ export class ThermostatService {
       .subscribe(thermostats => this.thermostats$.next(thermostats));
   }
 
-  getMeasurements(id: string, page?: number, pageSize?: number): Observable<Reading[]> {
+  getMeasurements(id: number, page?: number, pageSize?: number): Observable<Reading[]> {
     const url = `${environment.backendUrl}/thermostats/${id}/measurements?page=${page}&page_size=${pageSize}`;
     return this.http.get<Reading[]>(url);
   }
