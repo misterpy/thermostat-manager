@@ -1,0 +1,23 @@
+<mat-card>
+  <h1 class="header">Login</h1>
+
+  <form novalidate [formGroup]="loginForm" class="form" (ngSubmit)="login(loginForm.value)">
+    <mat-form-field>
+      <input matInput
+             type="text"
+             placeholder="User"
+             formControlName="user">
+
+      <mat-hint>Default users: owner, user.</mat-hint>
+      <mat-error>User required!</mat-error>
+    </mat-form-field>
+  </form>
+
+  <button class="button"
+          color="primary"
+          mat-raised-button
+          [disabled]="!loginForm.valid"
+          (click)="login(loginForm.value)">Login
+  </button>
+
+</mat-card>
