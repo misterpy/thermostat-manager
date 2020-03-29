@@ -1,10 +1,10 @@
 import { Component, EventEmitter, OnDestroy } from '@angular/core';
 import { ThermostatService } from '../../services/thermostat.service';
 import { ActivatedRoute } from '@angular/router';
-import { map, takeUntil } from 'rxjs/operators';
+import { concatMap, map, takeUntil } from 'rxjs/operators';
 import { AuthService } from '../../../authentication/services/auth.service';
 import { Thermostat } from '../../interfaces/thermostat.interface';
-import { zip } from 'rxjs';
+import { timer, zip } from 'rxjs';
 
 @Component({
   selector: 'app-thermostat-list',
@@ -47,8 +47,14 @@ export class ThermostatListComponent implements OnDestroy {
           const requests = this.thermostats.map(({id}) => this.thermostatService.getMeasurements(id)
             .pipe(map(({readings}) => readings[0])));
 
-          zip(...requests)
-            .pipe(takeUntil(this.componentDestroyed$))
+          /**
+           * Poll every 5 seconds to get the new readings from the backend.
+           */
+          timer(0, 5000)
+            .pipe(
+              takeUntil(this.componentDestroyed$),
+              concatMap(_ => zip(...requests)),
+            )
             .subscribe(thermostatReadings => {
               thermostatReadings.forEach(reading => {
                 const thermostat = this.thermostats.find(({id}) => reading.thermostat_id === id);

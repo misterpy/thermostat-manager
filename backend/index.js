@@ -188,6 +188,7 @@ app.listen(port, () => console.log(`Thermostat backend is listening on port ${po
 
 
 /**
- * Generate random readings for each thermostats every 10 mins
+ * Generate random readings for each thermostats every 5 seconds
+ * so that the differences is visible quickly in the app.
  */
-setInterval(() => thermostats.forEach(({id}) => createReading(id)), 60 * 10 * 1000);
+setInterval(() => thermostats.forEach(({id}) => createReading(id)), 5000);
