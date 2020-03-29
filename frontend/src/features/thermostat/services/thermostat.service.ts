@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Reading, Thermostat } from '../interfaces/thermostat.interface';
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -25,7 +25,8 @@ export class ThermostatService {
 
   getMeasurements(id: number, page?: number, pageSize?: number): Observable<Reading[]> {
     const url = `${environment.backendUrl}/thermostats/${id}/measurements?page=${page}&page_size=${pageSize}`;
-    return this.http.get<Reading[]>(url);
+    return this.http.get<Reading[]>(url)
+      .pipe(map(readings => readings.sort((a, b) => b.id - a.id)));
   }
 
   create(payload: Partial<Thermostat>): Observable<Thermostat> {
