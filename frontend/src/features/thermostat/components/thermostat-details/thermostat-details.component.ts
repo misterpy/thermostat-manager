@@ -14,6 +14,7 @@ export class ThermostatDetailsComponent implements OnDestroy {
   paginator = {
     pageIndex: 0,
     pageSize: 1,
+    length: 0,
   };
   thermostatId: number;
   readings: Reading[] = [];
@@ -50,8 +51,9 @@ export class ThermostatDetailsComponent implements OnDestroy {
         takeUntil(this.componentDestroyed$),
         take(1),
       )
-      .subscribe(readings => {
+      .subscribe(({readings, pagination: {length}}) => {
         this.readings = readings;
+        this.paginator.length = length;
 
         if (pageIndex === 0 && !!this.readings[0]) {
           this.isLowBattery = this.readings[0].battery_charge < 30;

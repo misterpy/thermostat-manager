@@ -23,10 +23,10 @@ export class ThermostatService {
       .subscribe(thermostats => this.thermostats$.next(thermostats));
   }
 
-  getMeasurements(id: number, page?: number, pageSize?: number): Observable<Reading[]> {
+  getMeasurements(id: number, page?: number, pageSize?: number): Observable<{readings: Reading[], pagination: any}> {
     const url = `${environment.backendUrl}/thermostats/${id}/measurements?page=${page}&page_size=${pageSize}`;
-    return this.http.get<Reading[]>(url)
-      .pipe(map(readings => readings.sort((a, b) => b.id - a.id)));
+    return this.http.get<{readings: Reading[], pagination: any}>(url)
+      .pipe(map(({readings, pagination}) => ({readings: readings.sort((a, b) => b.id - a.id), pagination})));
   }
 
   create(payload: Partial<Thermostat>): Observable<Thermostat> {
