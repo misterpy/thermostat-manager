@@ -17,6 +17,11 @@ import { ThermostatRoutingModule } from './thermostat-routing.module';
 import { ThermostatLayoutComponent } from './components/thermostat-layout/thermostat-layout.component';
 import { ThermostatDetailsComponent } from './components/thermostat-details/thermostat-details.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CreateThermostatFormComponent } from './components/create-thermostat-form/create-thermostat-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -24,6 +29,7 @@ import { HttpClientModule } from '@angular/common/http';
     ThermostatLayoutComponent,
     ThermostatDetailsComponent,
     ThermostatManagerComponent,
+    CreateThermostatFormComponent,
   ],
   imports: [
     CommonModule,
@@ -38,8 +44,12 @@ import { HttpClientModule } from '@angular/common/http';
     MatSidenavModule,
     MatTooltipModule,
     HttpClientModule,
+    MatSnackBarModule,
     MatPaginatorModule,
     ThermostatRoutingModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
 })
 export class ThermostatModule { }

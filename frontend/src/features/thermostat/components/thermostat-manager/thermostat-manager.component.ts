@@ -1,8 +1,10 @@
 import { Component, EventEmitter, OnDestroy, OnInit } from '@angular/core';
 import { ThermostatService } from '../../services/thermostat.service';
 import { Apartment, Thermostat } from '../../interfaces/thermostat.interface';
-import { takeUntil } from 'rxjs/operators';
+import { filter, switchMap, takeUntil } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
+import { CreateThermostatFormComponent } from '../create-thermostat-form/create-thermostat-form.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-thermostat-manager',
@@ -18,6 +20,7 @@ export class ThermostatManagerComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly dialog: MatDialog,
+    private readonly snackbar: MatSnackBar,
     private readonly thermostatService: ThermostatService,
   ) {
   }
@@ -49,7 +52,16 @@ export class ThermostatManagerComponent implements OnInit, OnDestroy {
   }
 
   onCreate() {
-    // this.dialog.open();
+    this.dialog.open(CreateThermostatFormComponent, {
+      width: '500',
+    })
+      .afterClosed()
+      .pipe(
+        takeUntil(this.componentDestroyed$),
+        filter(payload => payload !== null),
+        switchMap(payload => this.thermostatService.create(payload)),
+      )
+      .subscribe(() => this.snackbar.open('Thermostat crated successfully!', 'ok', {duration: 3500}));
   }
 
   ngOnDestroy(): void {

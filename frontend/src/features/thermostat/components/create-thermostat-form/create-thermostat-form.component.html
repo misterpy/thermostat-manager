@@ -1,0 +1,30 @@
+<h1 class="header">Create new thermostat</h1>
+
+<form novalidate [formGroup]="form" class="form">
+  <mat-form-field>
+    <input type="text"
+           matInput
+           formControlName="household_token"
+           placeholder="User">
+    <mat-error>User is required!</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input type="text"
+           matInput
+           formControlName="location"
+           placeholder="Location">
+    <mat-error>Location is required!</mat-error>
+  </mat-form-field>
+</form>
+
+<div class="actions">
+  <button mat-raised-button
+          color="primary"
+          (click)="create(form.value)"
+          [disabled]="!form.valid">Create</button>
+
+  <button mat-flat-button (click)="cancel()">
+    Cancel
+  </button>
+</div>
